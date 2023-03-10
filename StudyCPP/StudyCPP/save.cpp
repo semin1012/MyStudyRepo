@@ -15,7 +15,7 @@ void save( std::string_view fname)
 	// in.close();라는 코드는 필요가 없음 자동으로 됨
 
 	// 쓸 파일도 연다
-	std::ofstream out{"C++ Study Code2.txt", std::ios::app};
+	std::ofstream out{"2023 C++ Study.txt", std::ios::app};
 
 	out << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
 
@@ -27,8 +27,8 @@ void save( std::string_view fname)
 
 	// 현재 날짜와 시간을 출력한다(C++20)
 	auto time = floor<std::chrono::seconds>(std::chrono::system_clock::now());
-	out << std::chrono::zoned_time("Asia/Seoul", time) << std::endl;
-	std::cout << std::chrono::zoned_time("Asia/Seoul", time) << std::endl;
+	out  << std::chrono::zoned_time("Asia/Seoul", time) << std::endl;
+	std::cout << "\n\n\n" << std::chrono::zoned_time("Asia/Seoul", time) << std::endl;
 	out << std::endl;
 
 	// 읽을 파일의 정보를 읽어 쓸 파일에 덧붙여 쓴다
@@ -37,4 +37,20 @@ void save( std::string_view fname)
 
 	// 2. 알고리즘을 사용하여 벡터에 있는 내용을 파일에 복사(copy 알고리즘)한다
 	copy(v.begin(), v.end(), std::ostream_iterator<char>{out});
+}
+
+void saveCpp()
+{
+	std::cout << "저장하고 싶다면 s 를 입력하고 엔터를 눌러 주세요. " << std::endl;
+	
+	char input;
+	std::cin >> input;
+
+	if (input == 's') {
+		save("소스.cpp");
+		std::cout << "저장이 완료되었습니다." << std::endl;
+	}
+	else {
+		return;
+	}
 }
