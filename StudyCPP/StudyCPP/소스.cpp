@@ -16,24 +16,15 @@ using namespace std;
 int main(void) {
     string str;
     cin >> str;
-    for (int i = 0; i < str.length(); i++) {
-        if (isupper(str[i])) str[i] = tolower(str[i]);
-        else str[i] = toupper(str[i]);
-    }
-
-    cout << str;
+    for (int i = 0; i < str.length(); i++) cout << str[i] << endl;
     saveCpp();
 
-    // 다른 사람의 풀이 
-    //for (auto c : str)
-    //{
-    //    if ('a' <= c && c <= 'z')
-    //        c -= 'a' - 'A';
-    //    else
-    //        c += 'a' - 'A';
-    //    cout << c;
-    //}
-    //return 0;
 
-    // 
+
+    // 다른 사람 풀이
+    /*string str;
+    cin >> str;
+    for (char ch : str)
+        cout << (char)ch << endl;
+    return 0;*/
 }
