@@ -1,9 +1,7 @@
-//-----------------------------------------------------------------------------
-// ¹®ÀÚ ¸®½ºÆ®¸¦ ¹®ÀÚ¿­·Î º¯È¯ÇÏ±â
+ï»¿//-----------------------------------------------------------------------------
+// ë” í¬ê²Œ í•©ì¹˜ê¸°
 // 
-// ¹®ÀÚµéÀÌ ´ã°ÜÀÖ´Â ¹è¿­ arr°¡ ÁÖ¾îÁı´Ï´Ù. 
-// arrÀÇ ¿ø¼ÒµéÀ» ¼ø¼­´ë·Î ÀÌ¾î ºÙÀÎ ¹®ÀÚ¿­À» return ÇÏ´Â solution ÇÔ¼ö¸¦ 
-// ÀÛ¼ºÇØ ÁÖ¼¼¿ä.
+// ì—°ì‚° âŠ•ëŠ” ë‘ ì •ìˆ˜ì— ëŒ€í•œ ì—°ì‚°ìœ¼ë¡œ ë‘ ì •ìˆ˜ë¥¼ ë¶™ì—¬ì„œ ì“´ ê°’ì„ ë°˜í™˜í•©ë‹ˆë‹¤. 
 //-----------------------------------------------------------------------------
 #include <iostream>
 #include <string>
@@ -12,28 +10,23 @@
 
 using namespace std;
 
-string solution(vector<string> arr);
+int solution(int a, int b);
 
 int main(void) {
-    vector<string> str;
-    str.push_back("a");
-    str.push_back("b");
-    str.push_back("c");
-    string answer = solution(str);
-    cout << answer << endl;
+    int a = 9;
+    int b = 91;
+    cout << solution(a, b) << endl;
+
     //saveCpp();
 }
 
-string solution(vector<string> arr) {
-    string answer = "";
-    for (int i = 0; i < arr.size(); i++) {
-        answer += arr[i];
-    }
+int solution(int a, int b) {
+    int answer = 0;
+    string sa = to_string(a);
+    string sb = to_string(b);
+
+    if (sa + sb > sb + sa) answer = stoi(sa + sb);
+    else answer = stoi(sb + sa);
     return answer;
 }
 
-// ´Ù¸¥ »ç¶÷ Ç®ÀÌ
-// #include <bits/stdc++.h>
-//string solution(vector<string> arr) {
-//    return accumulate(arr.begin(), arr.end(), string(""));
-//}
