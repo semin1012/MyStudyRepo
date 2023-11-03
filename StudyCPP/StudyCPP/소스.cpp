@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------------
-// n의 배수
+// 공배수 
 // 
-// 점수 num 이 n 의 배수라면 1 을 리턴하고, 아니라면 0 을 리턴하도록 
+// 점수 num 이 n 과 m 의 공배수라면 1 을 리턴한다
 //-----------------------------------------------------------------------------
 #include <iostream>
 #include <string>
@@ -10,15 +10,6 @@
 
 using namespace std;
 
-int solution(int num, int n) {
-    int answer = 0;
-    if (num % n == 0) answer = 1;
-    else answer = 0;
-    return answer;
+int solution(int number, int n, int m) {
+    return number % n == 0 && number % m == 0 ? 1 : 0;
 }
-
-
-// 다른 사람 풀이
-//int solution(int num, int n) {
-//    return num % n == 0 ? 1 : 0;
-//}
