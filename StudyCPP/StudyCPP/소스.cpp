@@ -1,7 +1,7 @@
 ﻿//-----------------------------------------------------------------------------
-// 더 크게 합치기
+// n의 배수
 // 
-// 연산 ⊕는 두 정수에 대한 연산으로 두 정수를 붙여서 쓴 값을 반환합니다. 
+// 점수 num 이 n 의 배수라면 1 을 리턴하고, 아니라면 0 을 리턴하도록 
 //-----------------------------------------------------------------------------
 #include <iostream>
 #include <string>
@@ -10,23 +10,15 @@
 
 using namespace std;
 
-int solution(int a, int b);
-
-int main(void) {
-    int a = 9;
-    int b = 91;
-    cout << solution(a, b) << endl;
-
-    //saveCpp();
-}
-
-int solution(int a, int b) {
+int solution(int num, int n) {
     int answer = 0;
-    string sa = to_string(a);
-    string sb = to_string(b);
-
-    if (sa + sb > sb + sa) answer = stoi(sa + sb);
-    else answer = stoi(sb + sa);
+    if (num % n == 0) answer = 1;
+    else answer = 0;
     return answer;
 }
 
+
+// 다른 사람 풀이
+//int solution(int num, int n) {
+//    return num % n == 0 ? 1 : 0;
+//}
