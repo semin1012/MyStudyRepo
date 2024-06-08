@@ -3,25 +3,38 @@
 #include <string>
 using namespace std;
 
-// 백준 11720번
-// N개의 숫자가 공백 없이 쓰여있다. 이 숫자를 모두 합해서 출력하는 프로그램을 작성하시오.
-// 첫째 줄에 숫자의 개수 N (1 ≤ N ≤ 100)이 주어진다. 둘째 줄에 숫자 N개가 공백없이 주어진다.
+// 백준 1546번: 평균
+// 세준이는 기말고사를 망쳤다. 세준이는 점수를 조작해서 집에 가져가기로 했다. 
+// 일단 세준이는 자기 점수 중에 최댓값을 골랐다. 이 값을 M이라고 한다. 
+// 그리고 나서 모든 점수를 점수/M*100으로 고쳤다.
+
+// 예를 들어, 세준이의 최고점이 70이고, 수학점수가 50이었으면 
+// 수학점수는 50 / 70 * 100이 되어 71.43점이 된다.
+
+// 세준이의 성적을 위의 방법대로 새로 계산했을 때, 새로운 평균을 구하는 프로그램을 작성하시오.
 
 int main()
 {
-	int n;
-	string numbers;
+	int cnt;
+	int score[1000];
 
-	cin >> n;
-	cin >> numbers;
+	cin >> cnt;
+	for (int i = 0; i < cnt; i++)
+	{
+		cin >> score[i];
+	}
 
 
 	int sum = 0;
+	int max = 0;
 
-	vector<int> nums;
-	for (int i = 0; i < numbers.length(); i++)
+	for (int i = 0; i < cnt; i++)
 	{
-		sum += numbers[i] - '0';
+		sum += score[i];
+		if (max < score[i])
+			max = score[i];
 	}
-	cout << sum << endl;
+
+	float result = (float)sum * 100 / max / cnt;
+	cout << result << endl;
 }
