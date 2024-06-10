@@ -1,48 +1,63 @@
 ﻿#include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
-// 백준 10986번 : 나머지 합 구하기
-
+// 백준 1253번 : 좋은 수
 
 int main()
 {
-	ios_base::sync_with_stdio(false);
+	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	int cnt, num;
-	cin >> cnt >> num;
+	int N = 0;
 
-	vector<long> dp(cnt + 1, 0);	// 합계 계산용
-	vector<long> remain(num + 1, 0);	// 나머지 저장용
-	for (int i = 1; i <= cnt; i++) 
+	cin >> N;
+
+	vector<int> nums(N, 0);
+
+	for (int i = 0; i < N; i++)
 	{
-		int temp = 0;
-		cin >> temp;
-		dp[i] = dp[i - 1] + temp;
-		cout << dp[i] << " ";
+		cin >> nums[i];
 	}
+
+	sort(nums.begin(), nums.end());
 
 	int result = 0;
 
-	for (int i = 0; i < cnt; i++)
+	for (int i = 0; i < N; i++)
 	{
-		int remainder = dp[i] % num;
+		long find = nums[i];	// 좋은 수인지 판별할 값
+		int start = 0;
+		int end = N - 1;
 
-		if (remainder == 0)
-			result++;
+		while (start < end)
+		{
+			int sum = nums[start] + nums[end];
 
-		remain[remainder]++;
+			if (sum == find)
+			{
+				if (start != i && end != i)
+				{
+					result++;
+					break;
+				}
+
+				else if (start == i)
+					start++;
+
+				else if (end == i)
+					end--;
+			}
+
+			else if (sum > find)
+				end--;
+
+			else if (sum < find)
+				start++;    
+		}
 	}
 
-	for (int i = 0; i < num; i++)
-	{
-		if (remain[i] > 1)	// 나머지가 2개 이상인 애만 검사한다
-			result = result + (remain[i] * (remain[i] - 1)) / (2 * (2 - 1));
-			// 나머지가 같은 애들 중 2개를 뽑는 경우의 수를 구한다
-			// 컴베이션(순열) 공식을 이용한다, 책에 써둠
-	}
-
-	cout << endl << result << endl;
+	cout << "result: " << result << endl;
 }
