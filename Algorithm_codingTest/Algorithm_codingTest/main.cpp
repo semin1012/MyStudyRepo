@@ -4,11 +4,18 @@
 #include <queue>
 using namespace std;
 
-// 백준 2164번 : 카드게임
+// 백준 11286번 : 절댓값 힙 구현하기
 
-/*  */
-
-typedef pair<int, int> Node;
+struct compare
+{
+	bool operator()(int o1, int o2)
+	{
+		if (abs(o1) == abs(o2))
+			return o1 > o2;
+		else
+			return abs(o1) > abs(o2);
+	}
+};
 
 int main()
 {
@@ -19,16 +26,25 @@ int main()
 	int n;
 	cin >> n;
 
-	queue<int> myQueue;
-
-	for (int i = 1; i <= n; i++)
-		myQueue.push(i);
-
-	while (myQueue.size() > 1) {
-		myQueue.pop();				// pop = 1, 가장 앞에 것. 선입선출
-		myQueue.push(myQueue.front());	// 맨 앞에 것을 뒤에 추가해준다
-		myQueue.pop();					// 추가해줬으니 빼 준다.
+	priority_queue<int, vector<int>, compare> myQueue;
+	vector<int> nums(n, 0);
+	for (int i = 0; i < n; i++) {
+		cin >> nums[i];
 	}
 
-	cout << myQueue.front();
+	for (int i = 0; i < n; i++) {
+		if (nums[i] == 0)
+		{
+			if (myQueue.empty())
+				cout << '0' << endl;
+			else {
+				cout << myQueue.top() << endl;
+				myQueue.pop();
+			}
+		}
+
+		else {
+			myQueue.push(nums[i]);
+		}
+	}
 }
