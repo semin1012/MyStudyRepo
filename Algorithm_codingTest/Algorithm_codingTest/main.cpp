@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-// 백준 1940번 : 주몽의 명령
+// 백준 12891번 : DNA 비밀번호
 
 /* 주몽은 철기군을 양성하기 위한 프로젝트에 나섰다. 
 그래서 야철대장을 통해 철기군이 입을 갑옷을 만들게 하였다. 
@@ -17,47 +17,101 @@ M(1 ≤ M ≤ 10,000,000)이 되면 갑옷이 만들어 지게 된다.
 이러한 궁금증을 풀어 주기 위하여 N(1 ≤ N ≤ 15,000) 개의 재료와 M이 주어졌을 때 
 몇 개의 갑옷을 만들 수 있는지를 구하는 프로그램을 작성하시오. */
 
+void Add(char c);
+void Remove(char c);
+
+int checkArr[4] = {};
+int myArr[4] = {};
+int checkCnt = 0;
+
 int main()
 {
 	ios::sync_with_stdio(false);
-	cout.tie(NULL);
 	cin.tie(NULL);
+	cout.tie(NULL);
 
-	int n = 0;
-	cin >> n;
+	int allNum, partNum;
+	cin >> allNum >> partNum;
 
-	int find = 0;
-	cin >> find;
+	string str;
+	cin >> str;
 
-	vector<int> numbers(n, 0);
-	
-	for (int i = 0; i < n; i++)
-	{
-		cin >> numbers[i];
+
+	for ( int i = 0 ; i < 4; i++ ) { 
+		cin >> checkArr[i];
+		if (checkArr[i] == 0)
+			checkCnt++;
 	}
 
-	sort(numbers.begin(), numbers.end());
+	for (int i = 0; i < partNum; i++) {
+		Add(str[i]);
+	}
 
 	int result = 0;
-	int startIdx = 0;
-	int endIdx = n-1;
+	if (checkCnt == 4)
+		result++;
 
-	while (startIdx < endIdx) {
-		if (numbers[startIdx] + numbers[endIdx] == find) {
+	for (int i = partNum; i < allNum; i++)
+	{
+		int j = i - partNum;
+		Add(str[i]);
+		Remove(str[j]);
+
+		if (checkCnt == 4)
 			result++;
-			startIdx++;
-			endIdx--;
-		}
-
-		else if (numbers[startIdx] + numbers[endIdx] > find) {
-			endIdx--; 
-		}
-
-		else {
-			startIdx++;
-		}
 	}
 
 	cout << result << endl;
+}
 
+void Add(char c) 
+{
+	switch (c) {
+	case 'A':
+		myArr[0]++; 
+		if (myArr[0] == checkArr[0])
+			checkCnt++;
+		break;
+	case 'C':
+		myArr[1]++;
+		if (myArr[1] == checkArr[1])
+			checkCnt++;
+		break;
+	case 'G':
+		myArr[2]++;
+		if (myArr[2] == checkArr[2])
+			checkCnt++;
+		break;
+	case 'T':
+		myArr[3]++;
+		if (myArr[3] == checkArr[3])
+			checkCnt++;
+		break;
+	}
+}
+
+void Remove(char c)
+{
+	switch (c) {
+	case 'A':
+		if (myArr[0] == checkArr[0])
+			checkCnt--;
+		myArr[0]--;
+		break;
+	case 'C':
+		if (myArr[1] == checkArr[1])
+			checkCnt--;
+		myArr[1]--;
+		break;
+	case 'G':
+		if (myArr[2] == checkArr[2])
+			checkCnt--;
+		myArr[2]--;
+		break;
+	case 'T':
+		if (myArr[3] == checkArr[3])
+			checkCnt--;
+		myArr[3]--;
+		break;
+	}
 }
