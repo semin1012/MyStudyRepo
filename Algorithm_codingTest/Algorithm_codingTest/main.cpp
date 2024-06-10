@@ -3,17 +3,19 @@
 #include <algorithm>
 using namespace std;
 
-// 백준 2018번 : 연속된 자연수의 합 구하기
+// 백준 1940번 : 주몽의 명령
 
-/* 어떠한 자연수 N은, 몇 개의 연속된 자연수의 합으로 나타낼 수 있다.
-당신은 어떤 자연수 N(1 ≤ N ≤ 10, 000, 000)에 대해서, 이 N을 몇 개의 
-연속된 자연수의 합으로 나타내는 가지수를 알고 싶어한다.
-이때, 사용하는 자연수는 N이하여야 한다.
+/* 주몽은 철기군을 양성하기 위한 프로젝트에 나섰다. 
+그래서 야철대장을 통해 철기군이 입을 갑옷을 만들게 하였다. 
+야철대장은 주몽의 명에 따르기 위하여 연구에 착수하던 중 아래와 같은 사실을 
+발견하게 되었다.
 
-예를 들어, 15를 나타내는 방법은 15, 7 + 8, 4 + 5 + 6, 1 + 2 + 3 + 4 + 5의 4가지가 있다.
-반면에 10을 나타내는 방법은 10, 1 + 2 + 3 + 4의 2가지가 있다.
-
-N을 입력받아 가지수를 출력하는 프로그램을 작성하시오. */
+갑옷을 만드는 재료들은 각각 고유한 번호를 가지고 있다. 
+갑옷은 두 개의 재료로 만드는데 두 재료의 고유한 번호를 합쳐서 
+M(1 ≤ M ≤ 10,000,000)이 되면 갑옷이 만들어 지게 된다. 
+야철대장은 자신이 만들고 있는 재료를 가지고 갑옷을 몇 개나 만들 수 있는지 궁금해졌다. 
+이러한 궁금증을 풀어 주기 위하여 N(1 ≤ N ≤ 15,000) 개의 재료와 M이 주어졌을 때 
+몇 개의 갑옷을 만들 수 있는지를 구하는 프로그램을 작성하시오. */
 
 int main()
 {
@@ -24,28 +26,35 @@ int main()
 	int n = 0;
 	cin >> n;
 
-	int result = 1;
+	int find = 0;
+	cin >> find;
 
-	int start = 1;
-	int end = 1;
-	int sum = 1;
+	vector<int> numbers(n, 0);
+	
+	for (int i = 0; i < n; i++)
+	{
+		cin >> numbers[i];
+	}
 
-	while (end != n) {
-		if (sum == n) {
+	sort(numbers.begin(), numbers.end());
+
+	int result = 0;
+	int startIdx = 0;
+	int endIdx = n-1;
+
+	while (startIdx < endIdx) {
+		if (numbers[startIdx] + numbers[endIdx] == find) {
 			result++;
-			end++;
-			sum += end;
+			startIdx++;
+			endIdx--;
 		}
 
-		else if (sum > n)
-		{
-			sum -= start;
-			start++;
+		else if (numbers[startIdx] + numbers[endIdx] > find) {
+			endIdx--; 
 		}
 
 		else {
-			end++;
-			sum += end;
+			startIdx++;
 		}
 	}
 
