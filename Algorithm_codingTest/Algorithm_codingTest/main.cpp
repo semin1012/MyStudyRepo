@@ -1,10 +1,10 @@
 ﻿#include <iostream>
 #include <vector>
 #include <algorithm>
-#include <stack>
+#include <queue>
 using namespace std;
 
-// 백준 17298번 : 오큰수
+// 백준 2164번 : 카드게임
 
 /*  */
 
@@ -19,33 +19,16 @@ int main()
 	int n;
 	cin >> n;
 
-	vector<int> nums(n, 0);
-	vector<int> result(n, 0);
+	queue<int> myQueue;
 
-	for (int i = 0; i < n; i++)
-	{
-		cin >> nums[i];
+	for (int i = 1; i <= n; i++)
+		myQueue.push(i);
+
+	while (myQueue.size() > 1) {
+		myQueue.pop();				// pop = 1, 가장 앞에 것. 선입선출
+		myQueue.push(myQueue.front());	// 맨 앞에 것을 뒤에 추가해준다
+		myQueue.pop();					// 추가해줬으니 빼 준다.
 	}
 
-	stack<int> myStack;
-	myStack.push(0); 
-
-	for (int i = 1; i < n; i++) {
-		while (!myStack.empty() && nums[myStack.top()] < nums[i]) {
-			result[myStack.top()] = nums[i];
-			myStack.pop();
-		}
-
-		myStack.push(i);
-	}
-
-	while (!myStack.empty()) {
-		result[myStack.top()] = -1;
-		myStack.pop();
-	}
-
-	for (int i = 0; i < n; i++)
-	{
-		cout << result[i] << " ";
-	}
+	cout << myQueue.front();
 }
