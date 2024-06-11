@@ -1,23 +1,19 @@
 ﻿#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-// 백준 9498 : 시험 성적
+// 백준 2752번 : 세수정렬
 
 int main()
 {
 	ios::sync_with_stdio(false);
 	cout.tie(NULL);
 	cin.tie(NULL);
-	int score;
-	cin >> score;
-	if ( score >= 90)
-		cout << "A";
-	else if (score >= 80)
-		cout << "B";
-	else if (score >= 70)
-		cout << "C";
-	else if ( score >= 60)
-		cout << "D";
-	else 
-		cout << "F";
+	vector<int> nums(3,0);
+	for ( int i = 0; i < 3; i++ )
+		cin >> nums[i];
+	sort(nums.begin(), nums.end());
+	for ( int i = 0 ; i < 3; i++ )
+		cout << nums[i] << " ";
 }
