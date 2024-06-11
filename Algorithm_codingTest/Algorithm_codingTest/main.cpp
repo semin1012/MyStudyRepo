@@ -3,17 +3,17 @@
 #include <algorithm>
 using namespace std;
 
-// 백준 2752번 : 세수정렬
+// 백준 2753번 : 윤년
 
 int main()
 {
 	ios::sync_with_stdio(false);
-	cout.tie(NULL);
 	cin.tie(NULL);
-	vector<int> nums(3,0);
-	for ( int i = 0; i < 3; i++ )
-		cin >> nums[i];
-	sort(nums.begin(), nums.end());
-	for ( int i = 0 ; i < 3; i++ )
-		cout << nums[i] << " ";
+	cout.tie(NULL);
+
+	int year;
+	cin >> year;
+	if ( (year%4 == 0 && year%100 != 0) || year%400 == 0)
+		cout << "1";
+	else cout << "0";
 }
