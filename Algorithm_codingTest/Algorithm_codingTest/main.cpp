@@ -1,15 +1,11 @@
 ﻿#include <iostream>
 using namespace std;
 
-// 백준 1000번 : A+B
+// 백준 2557번 : Hello World
 
 int main()
 {
 	ios::sync_with_stdio(false);
 	cout.tie(NULL);
-	cin.tie(NULL);
-
-	int a, b;
-	cin >> a >> b;
-	cout << a + b;
+	cout << "Hello World!";
 }
