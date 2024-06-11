@@ -1,15 +1,14 @@
 ﻿#include <iostream>
 using namespace std;
 
-// 백준 10171번 : 고양이
+// 백준 10869번 : 사칙연산
 
 int main()
 {
 	ios::sync_with_stdio(false);
 	cout.tie(NULL);
 	cin.tie(NULL);
-	cout << "\\    /\\\n";
-	cout << " )  ( ')\n";
-	cout << "(  /  )\n";
-	cout << " \\(__)|";
+	int a, b;
+	cin >> a >> b;
+	cout << a + b << '\n' << a-b << '\n' << a*b << '\n' << a/b << '\n' << a%b;
 }
