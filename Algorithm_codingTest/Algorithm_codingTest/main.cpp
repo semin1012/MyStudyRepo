@@ -1,19 +1,23 @@
 ﻿#include <iostream>
-#include <vector>
 #include <algorithm>
 using namespace std;
 
-// 백준 2753번 : 윤년
+// 백준 2480번 : 주사위 세 개
 
 int main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
-
-	int year;
-	cin >> year;
-	if ( (year%4 == 0 && year%100 != 0) || year%400 == 0)
-		cout << "1";
-	else cout << "0";
+	int a, b, c = 0;
+	cin >> a >> b >> c;
+	if ( a == b && a == c )
+		cout << 10000 + (a * 1000);
+	else if ( a == b || a == c )
+		cout << 1000 + a * 100;
+	else if ( b == c)
+		cout << 1000 + b * 100;
+	else {
+		cout << max(max(a, b), c) * 100;
+	}
 }
