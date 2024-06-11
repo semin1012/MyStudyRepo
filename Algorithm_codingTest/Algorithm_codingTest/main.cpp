@@ -1,11 +1,15 @@
 ﻿#include <iostream>
 using namespace std;
 
-// 백준 2557번 : Hello World
+// 백준 10171번 : 고양이
 
 int main()
 {
 	ios::sync_with_stdio(false);
 	cout.tie(NULL);
-	cout << "Hello World!";
+	cin.tie(NULL);
+	cout << "\\    /\\\n";
+	cout << " )  ( ')\n";
+	cout << "(  /  )\n";
+	cout << " \\(__)|";
 }
