@@ -1,25 +1,19 @@
 ﻿#include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
-// 백준 2576번 : 홀수
+// 백준 2587번 : 대표값2
 
 int main(void)
 {
-    int n[7];
-
+    vector<int> n(5, 0);
     int sum = 0;
-    int min = 101;
-
-    for (int i = 0 ; i < 7 ; i++ ) {
+    for ( int i = 0 ; i < 5; i++ ) {
         cin >> n[i];
-        if ( n[i] % 2 == 1 ) {
-            sum += n[i];
-            if ( min > n[i])
-                min = n[i];
-        }
+        sum += n[i];
     }
-    if ( sum != 0 )
-        cout << sum << endl << min;
-    else cout << -1;
+    sort(n.begin(), n.end());
+    int avg = sum / 5;
+    cout << avg << endl << n[2];
 }
