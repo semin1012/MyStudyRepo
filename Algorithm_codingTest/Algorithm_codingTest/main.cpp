@@ -2,20 +2,24 @@
 #include <vector>
 using namespace std;
 
-// 백준 2490 : 윷놀이
-int result, input;
-string res = "DCBAE";
+// 백준 2576번 : 홀수
 
-int main(void){
-  ios::sync_with_stdio(0);
-  cin.tie(0);
-    
-  for(int r = 0; r < 3; r++) {
-    result = 0;
-    for(int c = 0; c < 4; c++) {
-      cin >> input;
-      result += input;
+int main(void)
+{
+    int n[7];
+
+    int sum = 0;
+    int min = 101;
+
+    for (int i = 0 ; i < 7 ; i++ ) {
+        cin >> n[i];
+        if ( n[i] % 2 == 1 ) {
+            sum += n[i];
+            if ( min > n[i])
+                min = n[i];
+        }
     }
-    cout << res[result] << '\n';
-  }
+    if ( sum != 0 )
+        cout << sum << endl << min;
+    else cout << -1;
 }
