@@ -22,9 +22,8 @@ int main(void)
 
 	for (int i = 1; i <= 6; i++) {
 		for (int j = 0; j < 2; j++) {
-			if (num[j][i] != 0) {
-				result += (num[j][i] + 1) / 2;
-			}
+			result += num[j][i] / k;
+			if (num[j][i] % k) result++;
 		}
 	}
 	cout << result;
