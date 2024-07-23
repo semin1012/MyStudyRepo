@@ -1,39 +1,47 @@
 #include <iostream>
 #include <list>
-#include <string>
 using namespace std;
 
 int main()
 {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 	int n;
 	cin >> n;
-	while (n--) {
+
+	for (int i = 0; i < n; i++)
+	{
+		string temp;
 		list<char> result;
-		list<char>::iterator cursor = result.begin();
-
-		string str;
-		cin >> str;
-		for (char c : str) {
-			if (c == '<') {
-				if (cursor != result.begin()) cursor--;
-			}
-			else if (c == '>') {
-				if (cursor != result.end()) cursor++;
-			}
-			else if (c == '-') {
-				if (cursor != result.begin()) {
-					cursor--;
-					cursor = result.erase(cursor);
+		list<char>::iterator it = result.begin();
+		cin >> temp;
+		for (char c : temp)
+		{
+			switch (c)
+			{
+			case '-':
+				if (it != result.begin()) {
+					it--;
+					it = result.erase(it);
 				}
+				break;
+			case '<':
+				if (it != result.begin())
+					it--;
+				break;
+			case '>':
+				if (it != result.end())
+					it++;
+				break;
+			default:
+				it = result.insert(it, c);
+				it++;
+				break;
 			}
-			else
-				result.insert(cursor, c);
 		}
+		for (auto c : result)
+			cout << c;
+		cout << "\n";
 
-		for ( char c : result ) cout << c;
-		cout << '\n';
 	}
 }
