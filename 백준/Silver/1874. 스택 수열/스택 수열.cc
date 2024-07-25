@@ -1,46 +1,82 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <stack>
+#include <queue>
 using namespace std;
 
-// 백준 1874번 : 스택 수열
+//char result[1'000'000];
 
 int main()
 {
 	ios::sync_with_stdio(false);
-	cin.tie(NULL);
+	cin.tie(NULL); cout.tie(NULL);
 
-	int cnt;
-	cin >> cnt;
+	int n, num, curNum = 1;
+	cin >> n;
 
-	int num = 1;	// 자연수 값
+	stack<int> st;
+	queue<char> result;
+	int cnt = 0;
+	bool isVaild = true;
 
-	stack<int> myStack;
-	vector<char> result;
+	while (n--)
+	{
+		cin >> num;
 
-	for (int i = 0; i < cnt; i++) {
-		int sy;
-		cin >> sy;
-		
-		while (sy >= num) {
-			myStack.push(num);
-			num++;
-			result.push_back('+');
+		if (st.empty())	// st가 비어있을 때
+		{
+			if (num < curNum) {
+				isVaild = false;
+				break;
+			}
+			for (curNum; curNum <= num; curNum++)
+			{
+				st.push(curNum);
+				result.push('+');
+				//result[cnt++] = '+';
+			}
+
+			//result[cnt++] = '-';
+			result.push('-');
+			st.pop();
 		}
 
-		if (sy == myStack.top()) {
-			myStack.pop();
-			result.push_back('-');
+		else if (st.top() < num)
+		{
+			if (curNum > num)
+			{
+				isVaild = false;
+				break;
+
+			}
+			while (st.top() != num)
+			{
+				for (curNum; curNum <= num; curNum++) {
+					st.push(curNum);
+					//result[cnt++] = '+';
+					result.push('+');
+				}
+			}
 		}
 
-		else {
-			cout << "NO";
-			return 0 ;
+		while (!st.empty() && st.top() >= num)
+		{
+			//result[cnt++] = '-';
+			result.push('-');
+			st.pop();
 		}
 	}
 
-	for (auto a : result ) {
-		cout << a << '\n';
+	if (isVaild == true)
+	{
+		while (!result.empty())
+		{
+			cout << result.front() << "\n";
+			result.pop();
+		}
+		/*for (int i = 0; i < cnt; i++)
+		{
+			cout << result[i] << "\n";
+		}*/
 	}
+	else cout << "NO\n";
 }
