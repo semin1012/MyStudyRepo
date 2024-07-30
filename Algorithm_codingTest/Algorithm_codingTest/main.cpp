@@ -1,19 +1,40 @@
 ﻿#include <iostream>
-#include <vector>
-#include <algorithm>
 using namespace std;
 
-// 백준 2587번 : 대표값2
-
-int main(void)
+int main()
 {
-    vector<int> n(5, 0);
-    int sum = 0;
-    for ( int i = 0 ; i < 5; i++ ) {
-        cin >> n[i];
-        sum += n[i];
-    }
-    sort(n.begin(), n.end());
-    int avg = sum / 5;
-    cout << avg << endl << n[2];
+	int n;
+	cin >> n;
+
+	int nums[100];
+	int temp = n;
+	int idx = 0;
+
+	while (temp > 0)
+	{
+		if ( temp / 3 != 1 && temp / 3 != 0)
+			nums[idx++] = temp / 3;
+		temp = temp / 3;
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (i >= n / nums[0] && i < (n / nums[0]) * 2 && j >= n / nums[0] && j < (n / nums[0]) * 2)
+			{
+				cout << " ";
+			}
+			else if (i >= n / nums[1] && i < (n / nums[1]) * 2 && j >= n / nums[1] && j < (n / nums[1]) * 2)
+			{
+				cout << " ";
+			}
+			else if (i % 3 == 1) {
+				if (j % 3 == 1 ) cout << " ";
+				else cout << "*";
+			}
+			else cout << "*";
+		}
+		cout << "\n";
+	}
 }
