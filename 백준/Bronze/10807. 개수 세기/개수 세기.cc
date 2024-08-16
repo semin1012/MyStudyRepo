@@ -1,22 +1,25 @@
 #include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
 using namespace std;
 
-int main(void)
+int main()
 {
 	ios::sync_with_stdio(false);
-	cin.tie(NULL);
+	cin.tie(NULL); cout.tie(NULL);
 
-	int n, v, result = 0;
+	int nums[202] = {};
+	int n;
+	int find;
+	int temp;
+
 	cin >> n;
-	vector<int> num(n, 0);
+
 	for (int i = 0; i < n; i++)
-		cin >> num[i];
-	cin >> v;
-	for (int i = 0; i < n; i++)
-		if (num[i] == v)
-			result++;
-	cout << result;
+	{
+		cin >> temp;
+		nums[temp+101]++;
+	}
+
+	cin >> find;
+
+	cout << nums[find+101];
 }
