@@ -1,27 +1,50 @@
 #include <iostream>
-#include <vector>
-#include <string>
 using namespace std;
 
-int main(void) 
+int main()
 {
 	ios::sync_with_stdio(false);
-	cin.tie(NULL);
+	cin.tie(NULL); cout.tie(NULL);
 
-    int N, a[10] = {}, ans = 0;
-    cin >> N;
+	int n;
+	int a[10] = { };
 
-    // 자리수 추출
-    while (N) {
-        a[N % 10]++;
-        N /= 10;
-    }
+	cin >> n;
 
-    for (int i = 0; i < 10; i++) {
-        if (i == 6 || i == 9) continue;
-        ans = max(ans, a[i]);
-    }
-    // (a[6]+a[9])/2를 올림한 값이 6, 9에 대한 필요한 세트의 수이므로 (a[6]+a[9]+1)/2을 계산
-    ans = max(ans, (a[6] + a[9] + 1) / 2);
-    cout << ans;
+	while (n > 0)
+	{
+		a[n % 10]++;
+		n = n / 10;
+	}
+
+	int max = -1;
+	int idx = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		if (a[i] > max)
+		{
+			max = a[i];
+			idx = i;
+		}
+	}
+
+	if (idx == 6 || idx == 9)
+	{
+		max = (a[6] + a[9]+1) / 2;
+	}
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (i != 6 && i != 9)
+		{
+			if (a[i] > max)
+			{
+				max = a[i];
+				idx = i;
+			}
+		}
+		
+	}
+	
+	cout << max;
 }
