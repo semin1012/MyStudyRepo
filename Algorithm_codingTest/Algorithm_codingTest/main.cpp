@@ -1,40 +1,33 @@
-﻿#include <iostream>
+﻿#include <string>
+#include <vector>
+#include <algorithm>
+#include <map>
+#include <iostream>
+
 using namespace std;
 
-int main()
-{
-	int n;
-	cin >> n;
+vector<int> solution(vector<string> name, vector<int> yearning, vector<vector<string>> photo) {
+    vector<int> answer;
+    map<string, int> temp;
+    
+    for (int i = 0; i < name.size(); i++)
+        temp.insert(make_pair(name[i], yearning[i]));
 
-	int nums[100];
-	int temp = n;
-	int idx = 0;
-
-	while (temp > 0)
-	{
-		if ( temp / 3 != 1 && temp / 3 != 0)
-			nums[idx++] = temp / 3;
-		temp = temp / 3;
-	}
-
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < n; j++)
-		{
-			if (i >= n / nums[0] && i < (n / nums[0]) * 2 && j >= n / nums[0] && j < (n / nums[0]) * 2)
-			{
-				cout << " ";
-			}
-			else if (i >= n / nums[1] && i < (n / nums[1]) * 2 && j >= n / nums[1] && j < (n / nums[1]) * 2)
-			{
-				cout << " ";
-			}
-			else if (i % 3 == 1) {
-				if (j % 3 == 1 ) cout << " ";
-				else cout << "*";
-			}
-			else cout << "*";
-		}
-		cout << "\n";
-	}
+    for (int i = 0; i < photo.size(); i++)
+    {
+        int sum = 0;
+        for (int j = 0; j < photo[i].size(); j++)
+        {
+            for (int z = 0; z < name.size(); z++)
+            {
+                if (name[z] == photo[i][j])
+                {
+                    sum += yearning[z];
+                    break;
+                }
+            }
+        }
+        answer.push_back(sum);
+    }
+    return answer;
 }
