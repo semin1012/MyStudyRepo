@@ -3,6 +3,18 @@
 #include <vector>
 using namespace std;
 
+void InsertSort(vector<int>& nums)
+{
+	int i, j, key;
+	for (i = 1; i < nums.size(); i++)
+	{
+		key = nums[i];
+		for (j = i - 1; j >= 0 && nums[j] > key; j--)
+			nums[j + 1] = nums[j];
+		nums[j + 1] = key;
+	}
+}
+
 int main()
 {
 	srand(time(0));
@@ -14,28 +26,8 @@ int main()
 		cout << num << " ";
 	cout << endl;
 
-	for (int i = 1; i < nums.size(); i++)
-	{
-		int j = i - 1;
-		while (j >= 0)
-		{
-			if (nums[j] < nums[i])
-			{
-				int temp = nums[j];
-				nums[j] = nums[i];
-				nums[i] = temp;
-				break;
-			}
-			j--;
-		}
-		if (j < 0) j = 0;
-		for (int z = i; z > j; z--)
-		{
-			int temp = nums[z];
-			nums[z] = nums[z - 1];
-			nums[z - 1] = temp;
-		}
-	}
+	InsertSort(nums);
+
 	cout << "정렬 후: ";
 	for (int num : nums)
 		cout << num << " ";
