@@ -8,14 +8,9 @@ int solution(vector<int> sides) {
     int answer = 0;
 
     if (sides[0] > sides[1])
-    {
-        int temp = sides[0];
-        sides[0] = sides[1];
-        sides[1] = temp;
-    }
+        swap(sides[0], sides[1]);
 
-    answer += sides[1] - (sides[1] - sides[0]);
-    answer += (sides[1] + sides[0]) - sides[1] - 1;
+    answer = sides[0] * 2 - 1;
 
     return answer;
 }
