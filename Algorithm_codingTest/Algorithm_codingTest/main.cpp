@@ -1,35 +1,21 @@
-﻿#include <iostream>
-#include <algorithm>
+﻿#include <string>
 #include <vector>
+#include <iostream>
+
 using namespace std;
 
-void InsertSort(vector<int>& nums)
-{
-	int i, j, key;
-	for (i = 1; i < nums.size(); i++)
-	{
-		key = nums[i];
-		for (j = i - 1; j >= 0 && nums[j] > key; j--)
-			nums[j + 1] = nums[j];
-		nums[j + 1] = key;
-	}
+int solution(vector<int> sides) {
+    int answer = 0;
+
+    if (sides[0] > sides[1])
+        swap(sides[0], sides[1]);
+
+    answer = sides[0] * 2 - 1;
+
+    return answer;
 }
 
 int main()
 {
-	srand(time(0));
-	vector<int> nums = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	random_shuffle(nums.begin(), nums.end());
-
-	cout << "정렬 전: ";
-	for (int num : nums)
-		cout << num << " ";
-	cout << endl;
-
-	InsertSort(nums);
-
-	cout << "정렬 후: ";
-	for (int num : nums)
-		cout << num << " ";
-	cout << endl;
+    cout << solution(vector<int>({ 11, 7 })) << endl;
 }
