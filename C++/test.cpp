@@ -1,92 +1,62 @@
 #include <iostream>
 using namespace std;
 
-int func1(int N){
-  return -1;
+const int MX = 1000005;
+int dat[MX], pre[MX], nxt[MX];
+int unused = 1;
+
+void insert(int addr, int num){
+    dat[unused] = num;
+    pre[unused] = addr;
+    nxt[unused] = nxt[addr];
+    if (nxt[addr] != -1) pre[nxt[addr]] = unused;
+    nxt[addr] = unused;
+    unused++;
 }
 
-// 주어진 길이 N의 int 배열 arr에서 합이 100인 서로 다른 위치의 두 원소가 존재하면
-// 1을, 존재하지 않으면 0을 반환하는 함수 func2(int arr[], int N)을 작성하라.
-// arr의 각 수는 0 이상 100 이하이고 N은 1000 이하이다.
-int func2(int arr[], int N){
-    int temp[1000] = {};
-    for (int i = 0; i < N; i++)
-    {
-        if (temp[100 - arr[i]] == 1) 
-            return 1;
-        temp[arr[i]]++;
-    }
-    return 0;
+void erase(int addr){
+    if (nxt[addr] != -1) pre[nxt[addr]] = pre[addr];
+    nxt[pre[addr]] = nxt[addr];
 }
 
-int func3(int N){
-  return -1;
-}
-
-int func4(int N){
-  return -1;
-}
-
-void test1(){
-  cout << "****** func1 test ******\n";
-  int n[3] = {16, 34567, 27639};
-  int ans[3] = {60, 278812814, 178254968};
-  for(int i = 0; i < 3; i++){
-    int result = func1(n[i]);
-    cout << "TC #" << i << '\n';
-    cout << "expected : " << ans[i] << " result : " << result;
-    if(ans[i] == result) cout << " ... Correct!\n";
-    else cout << " ... Wrong!\n";
+void traverse(){
+  int cur = nxt[0];
+  while(cur != -1){
+    cout << dat[cur] << ' ';
+    cur = nxt[cur];
   }
-  cout << "*************************\n\n";
+  cout << "\n\n";
 }
 
-void test2(){
-  cout << "****** func2 test ******\n";
-  int arr[3][4] = {{1,52,48}, {50,42}, {4,13,63,87}};
-  int n[3] = {3, 2, 4};
-  int ans[3] = {1, 0, 1};
-  for(int i = 0; i < 3; i++){
-    int result = func2(arr[i], n[i]);
-    cout << "TC #" << i << '\n';
-    cout << "expected : " << ans[i] << " result : " << result;
-    if(ans[i] == result) cout << " ... Correct!\n";
-    else cout << " ... Wrong!\n";
-  }
-  cout << "*************************\n\n";
+void insert_test(){
+  cout << "****** insert_test *****\n";
+  insert(0, 10); // 10(address=1)
+  traverse();
+  insert(0, 30); // 30(address=2) 10
+  traverse();
+  insert(2, 40); // 30 40(address=3) 10
+  traverse();
+  insert(1, 20); // 30 40 10 20(address=4)
+  traverse();
+  insert(4, 70); // 30 40 10 20 70(address=5)
+  traverse();
 }
 
-void test3(){
-  cout << "****** func3 test ******\n";
-  int n[3] = {9, 693953651, 756580036};
-  int ans[3] = {1, 0, 1};
-  for(int i = 0; i < 3; i++){
-    int result = func3(n[i]);
-    cout << "TC #" << i << '\n';
-    cout << "expected : " << ans[i] << " result : " << result;
-    if(ans[i] == result) cout << " ... Correct!\n";
-    else cout << " ... Wrong!\n";
-  }
-  cout << "*************************\n\n";
+void erase_test(){
+  cout << "****** erase_test *****\n";
+  erase(1); // 30 40 20 70
+  traverse();
+  erase(2); // 40 20 70
+  traverse();
+  erase(4); // 40 70
+  traverse();
+  erase(5); // 40
+  traverse();
 }
 
-void test4(){
-  cout << "****** func4 test ******\n";
-  int n[3] = {5, 97615282, 1024};
-  int ans[3] = {4, 67108864, 1024};
-  for(int i = 0; i < 3; i++){
-    int result = func4(n[i]);
-    cout << "TC #" << i << '\n';
-    cout << "expected : " << ans[i] << " result : " << result;
-    if(ans[i] == result) cout << " ... Correct!\n";
-    else cout << " ... Wrong!\n";
-  }
-  cout << "*************************\n\n";
-}
-
-int main(void){
-  test1();
-  test2();
-  test3();
-  test4();
+int main(void) {
+  fill(pre, pre+MX, -1);
+  fill(nxt, nxt+MX, -1);
+  insert_test();
+  erase_test();
 }
