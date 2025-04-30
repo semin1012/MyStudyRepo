@@ -3,32 +3,40 @@ using namespace std;
 
 const int MX = 1000005;
 int dat[MX];
-int pos = 0;
+int head = 0, tail = 0;
 
 void push(int x){
-    dat[pos++] = x;
+    dat[tail++] = x;
+    if (tail >= MX)
+        tail = 0;
 }
 
 void pop(){
-    if (pos > 0)
-        pos--;
+    head++;
+    if (head >= MX)
+        head = 0;
 }
 
-int top(){
-    return dat[pos-1];
+int front(){
+    return dat[head];
+}
+
+int back(){
+    if (tail == 0)
+        return dat[MX];
+    return dat[tail-1];
 }
 
 void test(){
-  push(5); push(4); push(3);
-  cout << top() << '\n'; // 3
+  push(10); push(20); push(30);
+  cout << front() << '\n'; // 10
+  cout << back() << '\n'; // 30
   pop(); pop();
-  cout << top() << '\n'; // 5
-  push(10); push(12);
-  cout << top() << '\n'; // 12
-  pop();
-  cout << top() << '\n'; // 10
+  push(15); push(25);
+  cout << front() << '\n'; // 30
+  cout << back() << '\n'; // 25
 }
 
 int main(void) {
-	test();
+  test();  
 }
